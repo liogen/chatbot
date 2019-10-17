@@ -23,9 +23,17 @@ This project use virtualenvwrapper to create a virtual environment for python.
 Naive chatbot
 -------------
 
-In this first example, we will implement a naive chatbot that just repeat what
-you said.
+In this first example, we will implement a naive chatbot that just pick an answer from a list.
 
 .. code-block:: bash
 
     $ python naive_chatbot.py
+
+Chatbot
+-------------
+
+In this second example, we will implement a chatbot that check for a best match to your input.
+
+.. code-block:: bash
+
+    $ python chatbot.py
