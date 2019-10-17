@@ -16,11 +16,11 @@ element from the user.
 bot = ChatBot(
     'Feedback Learning Bot',
     storage_adapter='chatterbot.storage.SQLStorageAdapter',
-    logic_adapters=[
-        'chatterbot.logic.BestMatch',
-        'chatterbot.logic.MathematicalEvaluation',
-        'chatterbot.logic.UnitConversion',
-    ],
+    # logic_adapters=[
+    #     'chatterbot.logic.BestMatch',
+    #     'chatterbot.logic.MathematicalEvaluation',
+    #     'chatterbot.logic.UnitConversion',
+    # ],
     database_uri='sqlite:///database.sqlite3'
 )
 
@@ -30,38 +30,14 @@ trainer.train(
     'chatterbot.corpus.english'
 )
 
-def get_feedback():
-
-    text = input()
-
-    if 'yes' in text.lower():
-        return True
-    elif 'no' in text.lower():
-        return False
-    else:
-        print('Please type either "Yes" or "No"')
-        return get_feedback()
-
-
-print('Type something to begin...')
-
 # The following loop will execute each time the user enters input
 while True:
     try:
-        input_statement = Statement(text=input())
-        response = bot.generate_response(
-            input_statement
-        )
+        user_input = input()
 
-        print('\n Is "{}" a coherent response to "{}"? \n'.format(
-            response.text,
-            input_statement.text
-        ))
-        if get_feedback() is False:
-            print('please input the correct one')
-            correct_response = Statement(text=input())
-            bot.learn_response(correct_response, input_statement)
-            print('Responses added to bot!')
+        bot_response = bot.get_response(user_input)
+
+        print(bot_response)
 
     # Press ctrl-c or ctrl-d on the keyboard to exit
     except (KeyboardInterrupt, EOFError, SystemExit):
